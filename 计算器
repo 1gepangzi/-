@@ -104,3 +104,104 @@ int main()
 		printf_s("%d\n",res);
 	return 0;
 }
+V4
+#include<stdio.h>
+#include <string.h>
+#include<stdlib.h>
+int main()
+{
+	char a[]="1-2.5*4+10.2/5.1";
+	printf("算式为：%s\n",a);
+	float SHUZI[100]={'\0'};int xuhao1=0;
+	char FUHAO[20]="\0";int xuhao2=0;
+	for(int i=0;i<strlen(a);i++)
+	{
+		if((a[i]=='+')||(a[i]=='-')||(a[i]=='*')||(a[i]=='/'))
+		{
+		FUHAO[xuhao2]=a[i];
+		xuhao2++;
+		}
+	}
+	for(int i=0;i<strlen(a);i++)
+	{
+		char b[100]="\0";
+		int x=0;
+		while((i<=strlen(a))&&(a[i]!='+')&&(a[i]!='-')&&(a[i]!='*')&&(a[i]!='/'))
+		{
+			b[x]=a[i];
+			i++;
+			x++;
+		}
+		float shuzi=atof(b);
+		SHUZI[xuhao1]=shuzi;	
+		xuhao1++;
+	}
+	for(int i=0;i<strlen(FUHAO);i++)
+	{
+	    if(FUHAO[i]=='*')
+		{
+			float ji1=SHUZI[i],
+			ji2=SHUZI[i+1],
+			ji=ji1*ji2;
+			SHUZI[i+1]=ji;
+			SHUZI[i]=0;
+			if(i!=0)
+			{
+			   if(FUHAO[i-1]=='+')
+			   {
+			   	 FUHAO[i]='+';
+			   }
+			   else if(FUHAO[i-1]=='-')
+			   {
+			   	 FUHAO[i]='-';
+			   }
+			}
+			else 
+			{
+				FUHAO[i]='+';
+			}
+		}
+		else if(FUHAO[i]=='/')
+		{
+			float shang1=SHUZI[i],
+			shang2=SHUZI[i+1],
+			shang=shang1/shang2;
+			SHUZI[i+1]=shang;
+			SHUZI[i]=0;
+			if(i!=0)
+			{
+			   if(FUHAO[i-1]=='+')
+			   {
+			   	 FUHAO[i]='+';
+			   }
+			   else if(FUHAO[i-1]=='-')
+			   {
+			   	 FUHAO[i]='-';
+			   }
+			}
+			else 
+			{
+				FUHAO[i]='+';
+			}
+		}
+		else if(a[i]=='+'&&a[i]=='-')
+		{
+			break;
+		}
+	}
+	float res=SHUZI[0];
+	for(int j=0;j<strlen(FUHAO);j++)
+	{
+		if(FUHAO[j]=='+')
+		{
+			float jia=SHUZI[j+1];
+			res=res+jia;
+		}
+		else if(FUHAO[j]=='-')
+		{
+			float jian=SHUZI[j+1];
+			res=res-jian;
+		}
+	}
+	printf("运算结果为：%f\n",res);
+}
