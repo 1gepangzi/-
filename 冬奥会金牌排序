@@ -1,5 +1,50 @@
 Practice 1
+#include<stdio.h>
+struct Country
+{
+	char name[10];
+	int jp,yp,tp,zs;
+};
+typedef struct Country country;
 
+void printcountry(country c)
+{
+	printf("%s\t%d\t%d\t%d\t%d\n",c.name,c.jp,c.yp,c.tp,c.zs);
+}
+int main()
+{
+	country c[8];
+	FILE* fp=fopen("D:/file.txt","r");
+	if(fp==NULL)
+	{
+		printf("ERROR\n");
+		return 0;
+	}
+	for(int i=0;i<8;i++)
+	{
+		fscanf(fp,"%s %d %d %d %d\n",c[i].name,&c[i].jp,&c[i].yp,&c[i].tp,&c[i].zs);
+	} 
+	fclose(fp);
+	country zsMax=c[0];
+	country zsMin=c[0];
+	for(int i=0;i<8;i++)
+	{
+		if(c[i].zs>zsMax.zs)
+		{
+			zsMax=c[i];
+		}
+		if(c[i].zs<zsMin.zs)
+		{
+			zsMin=c[i];
+		}
+	}
+	printf("奖牌数最多的国家:\n");
+	printcountry(zsMax);
+	printf("奖牌数最少的国家:\n");
+	printcountry(zsMin);
+	
+	return 0;
+}
 
 Practic 2
 #include<stdio.h>
