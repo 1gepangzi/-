@@ -1,0 +1,61 @@
+
+#include<stdio.h>
+struct Country
+{
+	char name[10];
+	int jp,yp,tp,zs;
+};
+typedef struct Country country;
+
+country c[8];
+
+void printcountry(country c)
+{
+	printf("%s\t%d\t%d\t%d\t%d\n",c.name,c.jp,c.yp,c.tp,c.zs);
+}
+
+void sort(country c[],int n)
+{
+	for(int i=0;i<n-1;i++)
+	{
+		for(int j=0;j<n-1;j++)
+		{
+			if(c[j].jp<c[j+1].jp)
+			{
+				country temp=c[j];
+				c[j]=c[j+1];
+				c[j+1]=temp;
+			}
+		}
+	}
+}
+void readFile()
+{
+	FILE* fp=fopen("D:\file.txt","r");
+	if(fp==NULL)
+	{
+		printf("ERROR\n");
+		return 0;
+	}
+	for(int i=0;i<8;i++)
+	{
+		fscanf(fp,"%s %d %d %d %d\n",c[i].name,&c[i].jp,&c[i].yp,&c[i].tp,&c[i].zs);
+	}
+	fclose(fp);
+}
+void writFile()
+{
+	FILE* outfp=fopen("D:\newfile.txt","w");
+	for(int i=0;i<8;i++)
+	{
+		fprintf(outfp,"%s\t%d\t%d\t%d\t%t\n",c[i].name,c[i].jp,c[i].yp,c[i].tp,c[i].zs);
+	} 
+	fclose(outfp);
+}
+int main()	
+{
+	readFile();
+	sort(c,8);
+	writFile();
+	return 0;
+}
