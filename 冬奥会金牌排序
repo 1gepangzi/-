@@ -1,4 +1,76 @@
+Practice 1
 
+
+Practic 2
+#include<stdio.h>
+
+struct Country
+{
+	char name[10];
+	int jp,yp,tp,zs;
+};
+typedef struct Country country;
+
+void printcountry(country c)
+{
+	printf("%s\t%d\t%d\t%d\t%d\n",c.name,c.jp,c.yp,c.tp,c.zs);
+}
+int main()
+{
+	country c[8];
+	int i=0;
+	FILE *infp=fopen("D:/file.txt","r");
+	if(infp==NULL)
+	{
+		printf("ERROR\n");
+		return 0;
+	}
+	while(fscanf(infp,"%s %d %d %d %d\n",c[i].name,&c[i].jp,&c[i].yp,&c[i].tp,&c[i].zs)!=EOF)
+	{
+		i++;
+	}
+	fclose(infp);
+	
+	for(int i=0;i<8;i++)
+	{
+		printf("%s %d %d %d %d\n",c[i].name,c[i].jp,c[i].yp,c[i].tp,c[i].zs);
+	} 
+	
+	FILE* outfp1=fopen("D:/new1.txt","w");
+	for(int i=0;i<8;i++)
+	{
+		country zsMax=c[0];
+		for(int i=0;i<8;i++)
+		{
+			if(c[i].zs<zsMax.zs)
+			{
+				zsMax=c[i];
+			}
+			printcountry(zsMax);
+		}
+		fprintf(outfp1,"%s\t%d\t%d\t%d\t%d\n",c[i].name,c[i].jp,c[i].yp,c[i].tp,c[i].zs);
+	}
+	fclose(outfp1);
+	FILE* outfp2=fopen("D:/new2.txt","w");
+		for(int i=0;i<8;i++)
+		{
+			country zsMin=c[0];
+			for(int i=0;i<8;i++)
+			{
+				if(c[i].zs<zsMin.zs)
+				{
+					zsMin=c[i];
+				}
+				printcountry(zsMin);
+			}
+			fprintf(outfp2,"%s\t%d\t%d\t%d\t%d\n",c[i].name,c[i].jp,c[i].yp,c[i].tp,c[i].zs);
+		}
+		fclose(outfp2);
+		
+	return 0;
+}
+
+金牌排序
 #include<stdio.h>
 struct Country
 {
