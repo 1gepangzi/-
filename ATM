@@ -184,7 +184,7 @@ void saveData()
 }
 int main()
 {
-	printf("欢迎来到王者银行\n");
+	printf("欢迎来到XX银行\n");
 	printf("Welcome to XXX bank\n");
 	
 	printf("按1，中文服务\n");
