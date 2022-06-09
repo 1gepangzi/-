@@ -212,6 +212,23 @@ void printLinkedList()
 		curP=curP->next;
 	}
 }
+
+void saveData()
+{
+	FILE* fp=fopen("D:/atm.txt","w");
+	if(fp==NULL)
+	{
+		return;
+	}
+	Account * curP=head;
+	while(curP!=NULL)
+	{
+		fprintf(fp,"%s\t%s\t%s\t%s\t%s\n",curP->name,curP->idCard,curP->tel,curP->username,curP->password);
+		curP=curP->next;
+	}
+	fclose(fp);
+}
+
 int main()
 {
 	int i=loadData(); 
@@ -228,5 +245,8 @@ int main()
 	printf("按1，中文服务\n");
 	printf("Press 2,English Service\n");
 	scanf("%d",&language);
+	showMenu();
+	saveData();
+	printLinkedList();
 	return 0;
 }
